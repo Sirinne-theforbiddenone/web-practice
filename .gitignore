@@ -1,0 +1,7 @@
+.venv/
+.opencode/
+opencode.jsonc
+.env/
+graphify/
+AGENTS.md
+spec.md
