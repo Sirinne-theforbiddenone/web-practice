@@ -1,9 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="QLBH API")
+from app.routers import manufacturers, customers, products
 
-# Cho phép React frontend gọi API từ localhost:5173
+app = FastAPI(
+    title="QLBH API",
+    description="API quản lý cửa hàng sữa",
+    version="1.0.0"
+)
+
+# Cho phép React gọi API từ một origin khác.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],
@@ -12,10 +18,29 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Đăng ký các nhóm API.
+app.include_router(
+    manufacturers.router,
+    prefix="/api/manufacturers",
+    tags=["Manufacturers"]
+)
+
+app.include_router(
+    customers.router,
+    prefix="/api/customers",
+    tags=["Customers"]
+)
+
+app.include_router(
+    products.router,
+    prefix="/api/products",
+    tags=["Products"]
+)
+
 
 @app.get("/api/health")
 def health_check():
     return {
         "status": "ok",
-        "message": "QLBH Backend is running"
+        "message": "QLBH backend is running"
     }
