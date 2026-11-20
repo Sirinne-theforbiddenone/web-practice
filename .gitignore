@@ -5,3 +5,20 @@ opencode.jsonc
 graphify/
 AGENTS.md
 spec.md
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Database generated locally
+
+# Node
+node_modules/
+dist/
+
+# Environment
+
+
+# VS Code
+.vscode/
